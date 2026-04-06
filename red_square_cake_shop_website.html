@@ -1,0 +1,184 @@
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; background: #0a0a0a; color: #f5f0e8; }
+  .site { background: #0a0a0a; min-height: 100vh; }
+
+  /* NAV */
+  nav { background: #0d0d0d; border-bottom: 1px solid #c9a84c; padding: 18px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 22px; color: #c9a84c; letter-spacing: 3px; text-transform: uppercase; font-weight: bold; }
+  .logo span { color: #fff; font-size: 12px; display: block; letter-spacing: 5px; font-weight: normal; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: #ccc; text-decoration: none; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-family: sans-serif; cursor: pointer; transition: color 0.3s; }
+  .nav-links a:hover, .nav-links a.active { color: #c9a84c; }
+
+  /* SECTIONS */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #0d0d0d 0%, #1a1209 50%, #0d0d0d 100%); padding: 100px 40px; text-align: center; border-bottom: 1px solid #2a2010; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%); }
+  .hero-tag { font-family: sans-serif; font-size: 11px; letter-spacing: 4px; color: #c9a84c; text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-size: 52px; color: #fff; letter-spacing: 4px; text-transform: uppercase; line-height: 1.2; margin-bottom: 12px; }
+  .hero h1 span { color: #c9a84c; }
+  .hero-sub { font-family: sans-serif; font-size: 14px; color: #888; letter-spacing: 2px; margin-bottom: 40px; }
+  .hero-rating { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); padding: 10px 24px; border-radius: 30px; margin-bottom: 40px; }
+  .stars { color: #c9a84c; font-size: 16px; letter-spacing: 2px; }
+  .rating-text { font-family: sans-serif; font-size: 13px; color: #c9a84c; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-gold { background: #c9a84c; color: #000; padding: 14px 36px; border: none; font-family: sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; font-weight: bold; border-radius: 2px; }
+  .btn-outline { background: transparent; color: #c9a84c; padding: 14px 36px; border: 1px solid #c9a84c; font-family: sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border-radius: 2px; }
+
+  /* INFO STRIP */
+  .info-strip { background: #111; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 20px 40px; display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; }
+  .info-item { text-align: center; }
+  .info-item .label { font-family: sans-serif; font-size: 10px; letter-spacing: 3px; color: #c9a84c; text-transform: uppercase; margin-bottom: 4px; }
+  .info-item .value { font-family: sans-serif; font-size: 13px; color: #ddd; }
+
+  /* SPECIALTIES */
+  .specialties { padding: 80px 40px; text-align: center; }
+  .section-title { font-size: 32px; color: #fff; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 8px; }
+  .section-title span { color: #c9a84c; }
+  .section-line { width: 60px; height: 1px; background: #c9a84c; margin: 16px auto 50px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
+  .card { background: #111; border: 1px solid #2a2010; padding: 36px 24px; text-align: center; border-radius: 4px; transition: border-color 0.3s; }
+  .card:hover { border-color: #c9a84c; }
+  .card-icon { font-size: 36px; margin-bottom: 16px; }
+  .card-title { font-size: 15px; color: #c9a84c; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .card-desc { font-family: sans-serif; font-size: 13px; color: #888; line-height: 1.7; }
+
+  /* MENU */
+  .menu-section { padding: 80px 40px; }
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
+  .menu-card { background: #111; border: 1px solid #222; border-radius: 4px; overflow: hidden; transition: border-color 0.3s; }
+  .menu-card:hover { border-color: #c9a84c; }
+  .menu-img { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 64px; background: #1a1209; }
+  .menu-info { padding: 20px; }
+  .menu-name { font-size: 16px; color: #fff; letter-spacing: 1px; margin-bottom: 6px; }
+  .menu-desc { font-family: sans-serif; font-size: 12px; color: #777; line-height: 1.6; margin-bottom: 12px; }
+  .menu-price { font-family: sans-serif; font-size: 18px; color: #c9a84c; font-weight: bold; }
+
+  /* REVIEWS */
+  .reviews-section { padding: 80px 40px; background: #0d0d0d; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
+  .review-card { background: #111; border: 1px solid #222; border-radius: 4px; padding: 28px; }
+  .review-stars { color: #c9a84c; font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
+  .review-text { font-family: sans-serif; font-size: 13px; color: #aaa; line-height: 1.8; margin-bottom: 16px; font-style: italic; }
+  .review-author { font-family: sans-serif; font-size: 12px; color: #c9a84c; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* FOOTER */
+  footer { background: #050505; border-top: 1px solid #c9a84c; padding: 40px; text-align: center; }
+  .footer-logo { font-size: 20px; color: #c9a84c; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-info { font-family: sans-serif; font-size: 12px; color: #555; line-height: 2; }
+  .footer-info a { color: #c9a84c; text-decoration: none; }
+
+  /* OVERALL RATING */
+  .rating-box { background: #111; border: 1px solid #c9a84c; border-radius: 4px; padding: 30px; max-width: 300px; margin: 0 auto 50px; text-align: center; }
+  .big-rating { font-size: 56px; color: #c9a84c; font-weight: bold; line-height: 1; }
+  .rating-label { font-family: sans-serif; font-size: 11px; color: #888; letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
+</style>
+
+<div class="site">
+  <nav>
+    <div>
+      <div class="logo">Red Square <span>Cake Shop</span></div>
+    </div>
+    <ul class="nav-links">
+      <li><a class="active" onclick="showSection('home', this)">Home</a></li>
+      <li><a onclick="showSection('menu', this)">Menu</a></li>
+      <li><a onclick="showSection('reviews', this)">Reviews</a></li>
+    </ul>
+  </nav>
+
+  <div id="home" class="section active">
+    <div class="hero">
+      <div class="hero-tag">Est. Bhavnagar, Gujarat</div>
+      <h1>Red <span>Square</span><br>Cake Shop</h1>
+      <div class="hero-sub">Luxury Cakes & Pastries — Crafted with Love</div>
+      <div class="hero-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-text">4.0 on Google &nbsp;·&nbsp; Bhavnagar's Finest</span>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-gold" onclick="showSection('menu', document.querySelectorAll('.nav-links a')[1])">View Our Menu</button>
+        <button class="btn-outline" onclick="showSection('reviews', document.querySelectorAll('.nav-links a')[2])">See Reviews</button>
+      </div>
+    </div>
+
+    <div class="info-strip">
+      <div class="info-item"><div class="label">Location</div><div class="value">Ghogha Circle, Bhavnagar</div></div>
+      <div class="info-item"><div class="label">Hours</div><div class="value">Open · Closes 10 PM</div></div>
+      <div class="info-item"><div class="label">Call Us</div><div class="value">081414 58323</div></div>
+      <div class="info-item"><div class="label">Google Rating</div><div class="value">★ 4.0 / 5.0</div></div>
+    </div>
+
+    <div class="specialties">
+      <div class="section-title">Our <span>Specialties</span></div>
+      <div class="section-line"></div>
+      <div class="cards">
+        <div class="card"><div class="card-icon">🎂</div><div class="card-title">Custom Cakes</div><div class="card-desc">Handcrafted for every occasion — birthdays, weddings & more</div></div>
+        <div class="card"><div class="card-icon">🍰</div><div class="card-title">Pastries</div><div class="card-desc">Fresh daily pastries baked with finest ingredients</div></div>
+        <div class="card"><div class="card-icon">🎁</div><div class="card-title">Gift Boxes</div><div class="card-desc">Elegant gift hampers for every special moment</div></div>
+        <div class="card"><div class="card-icon">🍫</div><div class="card-title">Chocolates</div><div class="card-desc">Premium Belgian chocolate creations & truffles</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="menu" class="section">
+    <div class="menu-section">
+      <div style="text-align:center">
+        <div class="section-title">Our <span>Menu</span></div>
+        <div class="section-line"></div>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card"><div class="menu-img">🎂</div><div class="menu-info"><div class="menu-name">Black Forest Cake</div><div class="menu-desc">Classic layers of chocolate sponge with cherries & cream</div><div class="menu-price">₹ 650</div></div></div>
+        <div class="menu-card"><div class="menu-img">🍰</div><div class="menu-info"><div class="menu-name">Butterscotch Cake</div><div class="menu-desc">Rich butterscotch cream with crunchy praline topping</div><div class="menu-price">₹ 550</div></div></div>
+        <div class="menu-card"><div class="menu-img">🍓</div><div class="menu-info"><div class="menu-name">Strawberry Delight</div><div class="menu-desc">Fresh strawberry layers with vanilla cream</div><div class="menu-price">₹ 600</div></div></div>
+        <div class="menu-card"><div class="menu-img">🎂</div><div class="menu-info"><div class="menu-name">Red Velvet Cake</div><div class="menu-desc">Our signature velvety red cake with cream cheese frosting</div><div class="menu-price">₹ 700</div></div></div>
+        <div class="menu-card"><div class="menu-img">🍫</div><div class="menu-info"><div class="menu-name">Chocolate Truffle</div><div class="menu-desc">Decadent dark chocolate with ganache glaze</div><div class="menu-price">₹ 750</div></div></div>
+        <div class="menu-card"><div class="menu-img">🥐</div><div class="menu-info"><div class="menu-name">Assorted Pastries</div><div class="menu-desc">Daily fresh pastries — ask for today's selection</div><div class="menu-price">₹ 80+</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="reviews" class="section">
+    <div class="reviews-section">
+      <div style="text-align:center">
+        <div class="section-title">Customer <span>Reviews</span></div>
+        <div class="section-line"></div>
+        <div class="rating-box">
+          <div class="big-rating">4.0</div>
+          <div class="stars" style="font-size:20px;margin-top:8px;">★★★★☆</div>
+          <div class="rating-label">Google Reviews · Bhavnagar</div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Best cake shop in Bhavnagar! The black forest cake was absolutely divine. Will definitely order again."</div><div class="review-author">— Priya S.</div></div>
+        <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Ordered a custom birthday cake and it exceeded all expectations. Beautiful design and delicious taste!"</div><div class="review-author">— Rahul M.</div></div>
+        <div class="review-card"><div class="review-stars">★★★★☆</div><div class="review-text">"Great variety of cakes. The red velvet is a must-try! Friendly staff and nice ambiance."</div><div class="review-author">— Neha P.</div></div>
+        <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"Fresh pastries every day. My family loves their butterscotch cake. Highly recommended!"</div><div class="review-author">— Amit K.</div></div>
+        <div class="review-card"><div class="review-stars">★★★☆☆</div><div class="review-text">"Good cakes at reasonable prices. Can get a bit busy on weekends but worth the wait."</div><div class="review-author">— Kavita R.</div></div>
+        <div class="review-card"><div class="review-stars">★★★★★</div><div class="review-text">"The chocolate truffle cake is pure heaven! Perfect for special occasions. Love this place!"</div><div class="review-author">— Sanjay T.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Red Square Cake Shop</div>
+    <div class="footer-info">
+      Shop No 4, Municipal Shopping Centre, Ghogha Circle, Bhavnagar, Gujarat 364001<br>
+      <a href="tel:08141458323">081414 58323</a> &nbsp;·&nbsp; Open till 10 PM daily<br><br>
+      &copy; 2026 Red Square Cake Shop. All rights reserved.
+    </div>
+  </footer>
+</div>
+
+<script>
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+</script>
